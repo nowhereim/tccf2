@@ -18,7 +18,7 @@ export class LectureRepositoryImpl
     /* 비관 락 적용 */
     const entity = await transactionalEntityManager
       .createQueryBuilder(this.entityClass, 'lecture')
-      // .setLock('pessimistic_write')
+      .setLock('pessimistic_write')
       .leftJoinAndSelect('lecture.lectureSchedules', 'lectureSchedules')
       .leftJoinAndSelect('lectureSchedules.enrollments', 'enrollments')
       .where('lectureSchedules.id = :lectureScheduleId', {
